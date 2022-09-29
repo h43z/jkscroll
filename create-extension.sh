@@ -1,2 +1,2 @@
 #!/bin/sh
-zip -r -FS jk-extension.zip * --exclude '*.git*' --exclude '*.sh'
+zip jk-extension.zip background-script.js content-script.js manifest.json

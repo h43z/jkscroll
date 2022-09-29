@@ -2,15 +2,19 @@
   "name": "jk scroll",
   "description": "Scroll with j and k",
   "manifest_version": 2,
-  "version": "1.3",
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["content-script.js"],
-      "run_at": "document_end"
+  "version": "1.0",
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content-script.js"],
+    "run_at": "document_end"
+  }],
+  "background": {
+    "scripts": ["background-script.js"]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "jkscroll@h43z"
     }
-  ],
-  "permissions": [
-    "activeTab"
-  ]
+  },
+  "permissions": ["activeTab", "sessions"]
 }
