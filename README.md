@@ -14,6 +14,8 @@ Shortcut list
 // content-script.js
 j => scroll down
 k => scroll up
+h => go back one page in history
+l => go forward one page in history
 
 // background-script.js 
 // this functionality needs the browser extension API.
@@ -24,3 +26,7 @@ u => reopen last closed tab
 
 Run `sh create-extension.sh` and install `jk-extension.zip` manually in your
 browsers addons/extension section.
+
+So far the commands in  `background-script` won't work in `google-chrome`.
+Replace the `browser` keyword with `chrome` and change the code from using
+`promises` into callbacks. That should do the trick.
