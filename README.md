@@ -1,5 +1,5 @@
 # jk scroll
-Shortcuts for your browser by [@h43z](https://twitter.com/h43z). 
+Shortcuts for your [browser](https://addons.mozilla.org/en-US/firefox/addon/jk-scroll/) by [@h43z](https://twitter.com/h43z). 
 
 Too many browser extensions have permissions that allow them full
 access to every website you are visiting. 
