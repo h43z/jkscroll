@@ -8,9 +8,6 @@
     "js": ["content-script.js"],
     "run_at": "document_end"
   }],
-  "background": {
-    "scripts": ["background-script.js"]
-  },
   "browser_specific_settings": {
     "gecko": {
       "id": "jkscroll@h43z"

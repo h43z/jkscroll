@@ -1,2 +1,2 @@
 #!/bin/sh
-zip jk-extension.zip background-script.js content-script.js manifest.json
+zip jk-extension.zip content-script.js manifest.json
