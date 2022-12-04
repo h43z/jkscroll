@@ -6,7 +6,7 @@ addEventListener('keydown', event => {
     case 'k': scrollBy(0, -50); break;
     case 'h': history.back(); break;
     case 'l': history.forward(); break;
-    case 't': chrome.runtime.sendMessage('u'); break;
-    case 'w': chrome.runtime.sendMessage('d'); break;
+    case 't': chrome.runtime.sendMessage('t'); break;
+    case 'w': chrome.runtime.sendMessage('w'); break;
   }
 })
