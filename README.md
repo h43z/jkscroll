@@ -20,8 +20,8 @@ l => go forward one page in history
 // background-script.js 
 // this functionality needs the browser extension API.
 // Only so called background scripts have access to it.
-d => close tab
-u => reopen last closed tab
+w => close tab
+t => reopen last closed tab
 ```
 
 Run `sh create-extension.sh` and install `jk-extension.zip` manually in your
