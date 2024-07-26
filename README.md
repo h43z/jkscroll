@@ -2,10 +2,10 @@
 Shortcuts for your [browser](https://addons.mozilla.org/en-US/firefox/addon/jk-scroll/) by [@h43z](https://twitter.com/h43z). 
 
 Too many browser extensions have permissions that allow them full
-access to every website you are visiting. 
+access to every website you are visit (often the need to) and so does this one.
 
-This extension does 90% of what I want from a shortcut extension in just 22
-lines of understandable code.
+But this extension has just 48 lines of understandable code that everyone can
+check and verify.
 
 Extend it if you need more functionality.
 
@@ -16,8 +16,9 @@ j => scroll down
 k => scroll up
 h => go back one page in history
 l => go forward one page in history
+<ESC> => remove focus from active element
 
-// background-script.js 
+// background-script.js
 // this functionality needs the browser extension API.
 // Only so called background scripts have access to it.
 w => close tab
