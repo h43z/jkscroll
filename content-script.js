@@ -1,4 +1,5 @@
 var scrollTarget = window
+var lastAction = null
 
 const actions = {
   'j': _ => scrollTarget.scrollBy(0, 50),
@@ -8,7 +9,9 @@ const actions = {
   't': _ => chrome.runtime.sendMessage('t'),
   'w': _ => chrome.runtime.sendMessage('w'),
   // setTimeout seems to fix pressing escape in google search
-  'Escape': _=> setTimeout(_=>document.activeElement.blur(), 0),
+  'Escape': _=> setTimeout(_=>document.activeElement.blur(), 5),
+  'G': _=> scrollTarget.scrollTo(0, scrollTarget.scrollHeight),
+  'g': _=> lastAction === 'g' && scrollTarget.scrollTo(0, 0)
 }
 
 addEventListener('keydown', event => {
@@ -16,11 +19,11 @@ addEventListener('keydown', event => {
   // most of them are done with ctrl
   if(event.ctrlKey) return
 
-  // only continue if key from actions is pressed
+  // only continue if a key from defined actions is pressed
   if(!actions[event.key]) return
 
   // don't hook if user is typing text into some kind of input field
-  // except if Escape was pressed
+  // except if Escape key was pressed
   if(
       (
         event.target.nodeName === 'INPUT' ||
@@ -30,8 +33,8 @@ addEventListener('keydown', event => {
     && event.key !== 'Escape'
   ) return
 
-  // run the action meant for keypress
-  actions[event.key]()
+  // store key pressed in lastAction and run the according action function
+  actions[lastAction = event.key]()
 
   // don't allow any pages to do their own shortcut actions for j and k
   if(event.key === 'j' || event.key === 'k'){
@@ -46,5 +49,5 @@ addEventListener('keydown', event => {
 // if jk scrolling does not work by default on visiting a page it would help to
 // either press space or scroll with a mouse for scrollTarget to get populated
 addEventListener('scroll', event => {
-  scrollTarget = event.target === document ? window : event.target
+  scrollTarget = event.target.scrollingElement || event.target
 }, true)
