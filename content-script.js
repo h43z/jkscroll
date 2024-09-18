@@ -11,10 +11,14 @@ const actions = {
   // setTimeout seems to fix pressing escape in google search
   'Escape': _=> setTimeout(_=>document.activeElement.blur(), 5),
   'G': _=> scrollTarget.scrollTo(0, scrollTarget.scrollHeight),
-  'g': _=> lastAction === 'g' && scrollTarget.scrollTo(0, 0)
+  'g': _=> lastAction === 'g' && scrollTarget.scrollTo(0, 0),
+  'r': _=> location.reload()
 }
 
 addEventListener('keydown', event => {
+  // disable jkscroll manually for certain websites
+  if(localStorage.getItem('jkdisable')) return
+
   // don't hook into native browser shortcuts
   // most of them are done with ctrl
   if(event.ctrlKey) return

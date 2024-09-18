@@ -27,6 +27,9 @@ w     => close tab
 t     => reopen last closed tab
 ```
 
+To disable jkscroll for a specific website create a localStorage item with the
+name of `jkdisable` and some truthy value.
+
 Run `sh create-extension.sh` and install `jk-extension.zip` manually in your
 browsers addons/extension section.
 
