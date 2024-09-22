@@ -38,7 +38,8 @@ addEventListener('keydown', event => {
   ) return
 
   // store key pressed in lastAction and run the according action function
-  actions[lastAction = event.key]()
+  actions[event.key]()
+  lastAction = event.key
 
   // don't allow any pages to do their own shortcut actions for j and k
   if(event.key === 'j' || event.key === 'k'){
