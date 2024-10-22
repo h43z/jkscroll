@@ -2,7 +2,7 @@
 vim inspired shortcuts for your [browser](https://addons.mozilla.org/en-US/firefox/addon/jk-scroll/) by [@h43z](https://twitter.com/h43z). 
 
 Many browser extensions have permissions that grant them full access to every 
-website you are visit, often they need to. And so does this one BUT
+website you visit abd often they need to. And so does this one BUT
 
 this extension only has 53 lines of understandable code that everyone can
 check and verify for themselves.
