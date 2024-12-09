@@ -12,7 +12,23 @@ const actions = {
   'Escape': _=> setTimeout(_=>document.activeElement.blur(), 5),
   'G': _=> scrollTarget.scrollTo(0, scrollTarget.scrollHeight),
   'g': _=> lastAction === 'g' && scrollTarget.scrollTo(0, 0),
-  'r': _=> location.reload()
+  'r': _=> location.reload(),
+  'Enter': _=> clickOnTextSelection()
+}
+
+function clickOnTextSelection(){
+  // Below code will click the first HTML Element that has a Text selection
+  // if Enter was pressed. This is useful after using the default firefox search
+  // with ctrl+f or /. This enables better mouseless website navigation.
+  elementWithSelection = getSelection().anchorNode?.parentElement
+  if(!elementWithSelection)
+    return
+
+  if(document.activeElement == elementWithSelection)
+    return
+
+  elementWithSelection.click()
+  getSelection().empty()
 }
 
 addEventListener('keydown', event => {
@@ -29,17 +45,17 @@ addEventListener('keydown', event => {
   // don't hook if user is typing text into some kind of input field
   // except if Escape key was pressed
   if(
-      (
-        event.target.nodeName === 'INPUT' ||
-        event.target.nodeName === 'TEXTAREA' ||
-        event.target.getAttribute("contenteditable") === "true"
-      )
+    (
+      event.target.nodeName === 'INPUT' ||
+      event.target.nodeName === 'TEXTAREA' ||
+      event.target.getAttribute("contenteditable") === "true"
+    )
     && event.key !== 'Escape'
   ) return
 
   // store key pressed in lastAction and run the according action function
-  actions[event.key]()
   lastAction = event.key
+  actions[event.key]()
 
   // don't allow any pages to do their own shortcut actions for j and k
   if(event.key === 'j' || event.key === 'k'){
