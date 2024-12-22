@@ -1,19 +1,41 @@
 var scrollTarget = window
 var lastAction = null
 
+const generatorIterateInputs = iterateInputs()
+
 const actions = {
-  'j': _ => scrollTarget.scrollBy(0, 50),
-  'k': _ => scrollTarget.scrollBy(0, -50),
-  'h': _ => history.back(),
-  'l': _ => history.forward(),
-  't': _ => chrome.runtime.sendMessage('t'),
-  'w': _ => chrome.runtime.sendMessage('w'),
+  'j': _=> scrollTarget.scrollBy(0, 50),
+  'k': _=> scrollTarget.scrollBy(0, -50),
+  'h': _=> history.back(),
+  'l': _=> history.forward(),
+  't': _=> chrome.runtime.sendMessage('t'),
+  'w': _=> chrome.runtime.sendMessage('w'),
   // setTimeout seems to fix pressing escape in google search
   'Escape': _=> setTimeout(_=>document.activeElement.blur(), 5),
   'G': _=> scrollTarget.scrollTo(0, scrollTarget.scrollHeight),
   'g': _=> lastAction === 'g' && scrollTarget.scrollTo(0, 0),
   'r': _=> location.reload(),
-  'Enter': _=> clickOnTextSelection()
+  'Enter': _=> clickOnTextSelection(),
+  'i': _=> generatorIterateInputs.next()
+}
+
+function* iterateInputs(){
+  // iterate through all texinputs on a website with pressing
+  while(true){
+    const allInputs = document.querySelectorAll(`
+      input[type="text"]:not([disabled]):not([readonly]):not([hidden]):not([style="display:none"]):not([style="visibility:hidden"]),
+      textarea:not([disabled]):not([readonly]):not([hidden]):not([style="display:none"]):not([style="visibility:hidden"]),
+      div[contenteditable="true"]:not([disabled]):not([hidden]):not([style="display:none"]):not([style="visibility:hidden"])`
+    )
+
+    for (let i = 0; i < allInputs.length; i++) {
+      // skip if element or any ancestor has the display property set to none
+      if(!allInputs[i].offsetParent)
+        continue
+
+      yield allInputs[i].focus()
+    }
+  }
 }
 
 function clickOnTextSelection(){
@@ -57,10 +79,9 @@ addEventListener('keydown', event => {
   lastAction = event.key
   actions[event.key]()
 
-  // don't allow any pages to do their own shortcut actions for j and k
-  if(event.key === 'j' || event.key === 'k'){
-    event.preventDefault()
-  }
+  // don't allow websites to do their own shortcut actions for defined jkscroll
+  // actions
+  event.preventDefault()
 }, true)
 
 // it's hard to figure out which element exactly should be addressed with

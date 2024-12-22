@@ -12,13 +12,18 @@ Extend it if you need more functionality.
 Shortcut list
 ```
 // content-script.js
-j     => scroll down
-k     => scroll up
-h     => go back one page in history
-l     => go forward one page in history
-<ESC> => remove focus from active element
-G     => go to bottom of page
-gg    => go to top of page
+j       => scroll down
+k       => scroll up
+h       => go back one page in history
+l       => go forward one page in history
+t       => reopen last closed tab
+w       => close tab
+Escape  => remove focus from active element
+G       => go to bottom of page
+gg      => go to top of page
+r       => reload tab
+Enter   => click on selected text (useful for / and CTRL+f search)
+i       => focus next Input element
 
 // background-script.js
 // this functionality needs the browser extension API.
