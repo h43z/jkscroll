@@ -20,7 +20,7 @@ const actions = {
 }
 
 function* iterateInputs(){
-  // iterate through all texinputs on a website with pressing
+  // iterate through all texinputs on a website with pressing i
   while(true){
     const allInputs = document.querySelectorAll(`
       input[type="text"]:not([disabled]):not([readonly]):not([hidden]):not([style="display:none"]):not([style="visibility:hidden"]),
@@ -35,6 +35,9 @@ function* iterateInputs(){
 
       yield allInputs[i].focus()
     }
+
+    if(!allInputs.length)
+      yield
   }
 }
 
