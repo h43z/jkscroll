@@ -61,8 +61,7 @@ addEventListener('keydown', event => {
   if(localStorage.getItem('jkdisable')) return
 
   // don't hook into native browser shortcuts
-  // most of them are done with ctrl
-  if(event.ctrlKey) return
+  if(event.ctrlKey || event.altKey || event.metaKey) return
 
   // only continue if a key from defined actions is pressed
   if(!actions[event.key]) return
