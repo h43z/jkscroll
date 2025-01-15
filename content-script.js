@@ -70,6 +70,7 @@ addEventListener('keydown', event => {
   // except if Escape key was pressed
   if(
     (
+      event.target.nodeName === 'SELECT' ||
       event.target.nodeName === 'INPUT' ||
       event.target.nodeName === 'TEXTAREA' ||
       event.target.getAttribute("contenteditable") === "true"
