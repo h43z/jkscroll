@@ -16,11 +16,15 @@ const actions = {
   'g': _=> lastAction === 'g' && scrollTarget.scrollTo(0, 0),
   'r': _=> location.reload(),
   'Enter': _=> clickOnTextSelection(),
-  'i': _=> generatorIterateInputs.next()
+  'i': _=> generatorIterateInputs.next(),
+  'n': _=> chrome.runtime.sendMessage('n'),
+  'p': _=> chrome.runtime.sendMessage('p')
 }
 
 function* iterateInputs(){
-  // iterate through all texinputs on a website with pressing i
+  // Iterate through all texinputs on a website by pressing i
+  // Before pressing i the next time you need to loose focus of the active
+  // element with escape
   while(true){
     const allInputs = document.querySelectorAll(`
       input[type="text"]:not([disabled]):not([readonly]):not([hidden]):not([style="display:none"]):not([style="visibility:hidden"]),
@@ -55,7 +59,7 @@ function clickOnTextSelection(){
 }
 
 addEventListener('keydown', event => {
-  // disable jkscroll manually for certain websites
+  // check if jkscroll was manually disabled
   if(localStorage.getItem('jkdisable')) return
 
   // don't hook into native browser shortcuts
