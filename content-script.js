@@ -46,10 +46,8 @@ function clickOnTextSelection(){
   // if Enter was pressed. This is useful after using the default firefox search
   // with ctrl+f or /. This enables better mouseless website navigation.
   elementWithSelection = getSelection().anchorNode?.parentElement
-  if(!elementWithSelection)
-    return
 
-  if(document.activeElement == elementWithSelection)
+  if(!elementWithSelection)
     return
 
   elementWithSelection.click()
