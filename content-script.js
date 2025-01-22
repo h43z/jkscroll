@@ -23,8 +23,6 @@ const actions = {
 
 function* iterateInputs(){
   // Iterate through all texinputs on a website by pressing i
-  // Before pressing i the next time you need to loose focus of the active
-  // element with escape
   while(true){
     const allInputs = document.querySelectorAll(`
       input[type="text"]:not([disabled]):not([readonly]):not([hidden]):not([style="display:none"]):not([style="visibility:hidden"]),
@@ -48,7 +46,7 @@ function* iterateInputs(){
 function clickOnTextSelection(){
   // Below code will click the first HTML Element that has a Text selection
   // if Enter was pressed. This is useful after using the default firefox search
-  // with ctrl+f or /. This enables better mouseless website navigation.
+  // functionality of ctrl+f or / and makes them work like the ' search.
   elementWithSelection = getSelection().anchorNode?.parentElement
 
   if(!elementWithSelection)
@@ -81,8 +79,8 @@ addEventListener('keydown', event => {
   ) return
 
   // store key pressed in lastAction and run the according action function
-  lastAction = event.key
   actions[event.key]()
+  lastAction = event.key
 
   // don't allow websites to do their own shortcut actions for defined jkscroll
   // actions
