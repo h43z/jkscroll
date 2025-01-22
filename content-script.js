@@ -25,7 +25,9 @@ function* iterateInputs(){
   // Iterate through all texinputs on a website by pressing i
   while(true){
     const allInputs = document.querySelectorAll(`
+      input:not([type]):not([disabled]):not([readonly]):not([hidden]):not([style="display:none"]):not([style="visibility:hidden"]),
       input[type="text"]:not([disabled]):not([readonly]):not([hidden]):not([style="display:none"]):not([style="visibility:hidden"]),
+      input[type="password"]:not([disabled]):not([readonly]):not([hidden]):not([style="display:none"]):not([style="visibility:hidden"])
       textarea:not([disabled]):not([readonly]):not([hidden]):not([style="display:none"]):not([style="visibility:hidden"]),
       div[contenteditable="true"]:not([disabled]):not([hidden]):not([style="display:none"]):not([style="visibility:hidden"])`
     )
