@@ -18,7 +18,9 @@ const actions = {
   'Enter': _=> clickOnTextSelection(),
   'i': _=> generatorIterateInputs.next(),
   'n': _=> chrome.runtime.sendMessage('n'),
-  'p': _=> chrome.runtime.sendMessage('p')
+  'p': _=> chrome.runtime.sendMessage('p'),
+  // make CTRL-c analog to Escape
+  'c': e => e.ctrlKey && setTimeout(_=>document.activeElement.blur(), 5)
 }
 
 function* iterateInputs(){
@@ -65,14 +67,15 @@ addEventListener('keydown', event => {
   // check if jkscroll was manually disabled
   if(localStorage.getItem('jkdisable')) return
 
-  // don't hook into native browser shortcuts
-  if(event.ctrlKey || event.altKey || event.metaKey) return
+  // don't hook into native browser shortcuts except CTRL-c
+  if((event.key !== 'c' && event.ctrlKey) || event.altKey || event.metaKey)
+    return
 
   // only continue if a key from defined actions is pressed
   if(!actions[event.key]) return
 
   // don't hook if user is typing text into some kind of input field
-  // except if Escape key was pressed
+  // except if Escape key was pressed or CTRL-C
   if(
     (
       event.target.nodeName === 'SELECT' ||
@@ -80,11 +83,11 @@ addEventListener('keydown', event => {
       event.target.nodeName === 'TEXTAREA' ||
       event.target.getAttribute("contenteditable") === "true"
     )
-    && event.key !== 'Escape'
+    && (event.key !== 'Escape' && !(event.ctrlKey && event.key === 'c'))
   ) return
 
   // store key pressed in lastAction and run the according action function
-  actions[event.key]()
+  actions[event.key](event)
   lastAction = event.key
 
   // don't allow websites to do their own shortcut actions for defined jkscroll
