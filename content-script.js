@@ -15,7 +15,6 @@ const actions = {
   'G': _=> scrollTarget.scrollTo(0, scrollTarget.scrollHeight),
   'g': _=> lastAction === 'g' && scrollTarget.scrollTo(0, 0),
   'r': _=> location.reload(),
-  'Enter': _=> clickOnTextSelection(),
   'i': _=> generatorIterateInputs.next(),
   'n': _=> chrome.runtime.sendMessage('n'),
   'p': _=> chrome.runtime.sendMessage('p'),
@@ -48,19 +47,6 @@ function* iterateInputs(){
     if(!allInputs.length || !foundInput)
       yield
   }
-}
-
-function clickOnTextSelection(){
-  // Below code will click the first HTML Element that has a Text selection
-  // if Enter was pressed. This is useful after using the default firefox search
-  // functionality of ctrl+f or / and makes them work like the ' search.
-  elementWithSelection = getSelection().anchorNode?.parentElement
-
-  if(!elementWithSelection)
-    return
-
-  elementWithSelection.click()
-  getSelection().empty()
 }
 
 addEventListener('keydown', event => {
