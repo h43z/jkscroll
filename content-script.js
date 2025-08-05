@@ -77,8 +77,9 @@ addEventListener('keydown', event => {
   lastAction = event.key
 
   // don't allow websites to do their own shortcut actions for defined jkscroll
-  // actions
-  event.preventDefault()
+  // actions. But allow CTRL+c (copy).
+  if(event.key !== 'c' && !event.ctrlKey)
+    event.preventDefault()
 }, true)
 
 // it's hard to figure out which element exactly should be addressed with
