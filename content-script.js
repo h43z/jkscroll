@@ -53,8 +53,14 @@ addEventListener('keydown', event => {
   // check if jkscroll was manually disabled
   if(localStorage.getItem('jkdisable')) return
 
-  // don't hook into native browser shortcuts except CTRL-c
-  if((event.key !== 'c' && event.ctrlKey) || event.altKey || event.metaKey)
+  // don't hook into native browser shortcuts
+  if(
+    event.altKey ||
+    event.metaKey ||
+    event.key === 'Control' ||
+    event.key === 'AltGraph' ||
+    event.key === 'Alt'
+  )
     return
 
   // only continue if a key from defined actions is pressed
