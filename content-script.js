@@ -57,7 +57,7 @@ addEventListener('keydown', event => {
   if(
     event.altKey ||
     event.metaKey ||
-    event.ctrlKey ||
+    (event.ctrlKey && event.key !== 'c') ||
     event.key === 'AltGraph' ||
     event.key === 'Alt'
   )
