@@ -18,6 +18,7 @@ const actions = {
   'i': _=> generatorIterateInputs.next(),
   'n': _=> chrome.runtime.sendMessage('n'),
   'p': _=> chrome.runtime.sendMessage('p'),
+  'o': _=> chrome.runtime.sendMessage('o'),
   // make CTRL-c analog to Escape
   'c': e => e.ctrlKey && setTimeout(_=>document.activeElement.blur(), 5)
 }

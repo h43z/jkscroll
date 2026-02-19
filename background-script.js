@@ -12,7 +12,7 @@ chrome.runtime.onMessage.addListener(cmd => {
     break;
     case 'n':
     case 'p':
-      // move focus to next or previous tab
+      // move focus to next (right) or previous tab (left)
       browser.tabs.query({currentWindow: true})
         .then(tabs => {
           const direction = cmd === 'p' ? -1 : +1
@@ -20,6 +20,15 @@ chrome.runtime.onMessage.addListener(cmd => {
           // allow cycling through tabs
           const futureActiveIndex = (activeIndex + direction + tabs.length) % tabs.length
           browser.tabs.update(tabs[futureActiveIndex].id, {active: true})
+        })
+    case 'o':
+      // focus tab that had been previously focused
+      browser.tabs.query({currentWindow: true, active: false})
+        .then(tabs => {
+          let tab = tabs.reduce((previous, current) => {
+            return previous.lastAccessed > current.lastAccessed ? previous : current
+          })
+          browser.tabs.update(tab.id, {active: true})
         })
     break;
   }

@@ -26,6 +26,7 @@ Enter   => click on selected text (useful for / and CTRL+f search)
 i       => focus next Input element
 n       => focus tab to the right (next)
 p       => focus tab to the left (previous)
+o       => focus tab that had been previously focused
 
 
 // background-script.js
