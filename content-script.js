@@ -65,16 +65,21 @@ addEventListener('keydown', event => {
   // only continue if a key from defined actions is pressed
   if(!actions[event.key]) return
 
+  const isEditing = event.composedPath().some(el =>
+    el instanceof HTMLElement &&
+    (
+      el.tagName === "SELECT" ||
+      el.tagName === "TEXTAREA" ||
+      (el.tagName === "INPUT" && !["checkbox", "radio", "button", "submit"].includes(el.type)) ||
+      el.isContentEditable
+    )
+  )
+
+
   // don't hook if user is typing text into some kind of input field
   // except if Escape key was pressed or CTRL-C
   if(
-    (
-      event.target.nodeName === 'SELECT' ||
-      event.target.nodeName === 'INPUT' ||
-      event.target.nodeName === 'TEXTAREA' ||
-      event.target.getAttribute("contenteditable") === "true"
-    )
-    && (event.key !== 'Escape' && !(event.ctrlKey && event.key === 'c'))
+    isEditing && (event.key !== 'Escape' && !(event.ctrlKey && event.key === 'c'))
   ) return
 
   // store key pressed in lastAction and run the according action function
