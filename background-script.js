@@ -21,6 +21,7 @@ chrome.runtime.onMessage.addListener(cmd => {
           const futureActiveIndex = (activeIndex + direction + tabs.length) % tabs.length
           browser.tabs.update(tabs[futureActiveIndex].id, {active: true})
         })
+    break;
     case 'o':
       // focus tab that had been previously focused
       browser.tabs.query({currentWindow: true, active: false})
